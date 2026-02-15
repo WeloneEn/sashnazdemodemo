@@ -901,8 +901,8 @@ body.quick-contact-open .quick-contact-panel {
   color: var(--hint-text);
   font-size: 12px;
   line-height: 1.35;
-  opacity: 0;
-  transform: translateY(-4px);
+  opacity: 0.82;
+  transform: translateY(0);
   pointer-events: none;
   transition: opacity 220ms ease, transform 220ms ease;
 }
@@ -911,7 +911,6 @@ body.quick-contact-open .quick-contact-panel {
 .panda-container:focus .panda-hint,
 .panda-container.eating .panda-hint {
   opacity: 1;
-  transform: translateY(0);
 }
 
 .mascot-stage {
@@ -939,13 +938,25 @@ body.quick-contact-open .quick-contact-panel {
   filter: blur(2px);
 }
 
+.mascot-ground {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 10px;
+  height: 18px;
+  border-radius: 999px;
+  background: radial-gradient(circle at center, rgba(44, 30, 19, 0.18), rgba(44, 30, 19, 0));
+  pointer-events: none;
+}
+
 .panda-character {
   position: absolute;
-  left: 28px;
-  bottom: 10px;
+  --mascot-scale: 1;
+  left: clamp(16px, 4vw, 34px);
+  bottom: 12px;
   width: 180px;
   height: 180px;
-  animation: mascot-float 3.2s ease-in-out infinite;
+  animation: mascot-float 3.8s ease-in-out infinite;
 }
 
 .panda-ear {
@@ -1094,12 +1105,12 @@ body.quick-contact-open .quick-contact-panel {
 
 .bamboo-svg {
   position: absolute;
-  right: 58px;
+  right: clamp(24px, 8vw, 72px);
   bottom: 18px;
   width: 42px;
   height: 170px;
   transform-origin: bottom center;
-  transition: transform 260ms ease;
+  transition: transform 320ms ease;
 }
 
 .bamboo-seg {
@@ -1145,7 +1156,7 @@ body.quick-contact-open .quick-contact-panel {
 }
 
 .bamboo-svg.bamboo-tilt {
-  transform: translateX(-18px) rotate(-26deg);
+  transform: translateX(-14px) rotate(-20deg);
 }
 
 .bamboo-seg.eaten {
@@ -1155,7 +1166,7 @@ body.quick-contact-open .quick-contact-panel {
 
 .crumbs {
   position: absolute;
-  left: 142px;
+  left: clamp(118px, 28vw, 182px);
   top: 110px;
   width: 110px;
   height: 62px;
@@ -1177,23 +1188,23 @@ body.quick-contact-open .quick-contact-panel {
 }
 
 .panda-container.eating .panda-character {
-  animation: mascot-eat-bob 420ms ease-in-out infinite;
+  animation: mascot-eat-bob 560ms ease-in-out infinite;
 }
 
 .panda-container.eating .panda-mouth {
-  animation: mascot-chew 220ms ease-in-out infinite alternate;
+  animation: mascot-chew 320ms ease-in-out infinite alternate;
 }
 
 .panda-container.eating .panda-arm.left {
-  animation: paw-lift-left 420ms ease-in-out infinite;
+  animation: paw-lift-left 560ms ease-in-out infinite;
 }
 
 .panda-container.eating .panda-arm.right {
-  animation: paw-lift-right 420ms ease-in-out infinite;
+  animation: paw-lift-right 560ms ease-in-out infinite;
 }
 
 .panda-container.eating .bamboo-svg {
-  animation: bamboo-rock 420ms ease-in-out infinite;
+  animation: bamboo-rock 560ms ease-in-out infinite;
 }
 
 /* Sonia easter runner */
@@ -1550,10 +1561,10 @@ body.quick-contact-open .quick-contact-panel {
 @keyframes mascot-float {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translateY(0) scale(var(--mascot-scale, 1));
   }
   50% {
-    transform: translateY(-4px);
+    transform: translateY(-3px) scale(var(--mascot-scale, 1));
   }
 }
 
@@ -1582,16 +1593,16 @@ body.quick-contact-open .quick-contact-panel {
 @keyframes mascot-eat-bob {
   0%,
   100% {
-    transform: translateY(0) rotate(0deg);
+    transform: translateY(0) rotate(0deg) scale(var(--mascot-scale, 1));
   }
   50% {
-    transform: translateY(-3px) rotate(-1deg);
+    transform: translateY(-2px) rotate(-0.6deg) scale(var(--mascot-scale, 1));
   }
 }
 
 @keyframes mascot-chew {
   0% {
-    transform: translateX(-50%) scaleY(0.55);
+    transform: translateX(-50%) scaleY(0.78);
   }
   100% {
     transform: translateX(-50%) scaleY(1);
@@ -1604,7 +1615,7 @@ body.quick-contact-open .quick-contact-panel {
     transform: translateX(0) translateY(0) rotate(0deg);
   }
   50% {
-    transform: translateX(10px) translateY(-8px) rotate(-8deg);
+    transform: translateX(6px) translateY(-5px) rotate(-5deg);
   }
 }
 
@@ -1614,17 +1625,17 @@ body.quick-contact-open .quick-contact-panel {
     transform: translateX(0) translateY(0) rotate(0deg);
   }
   50% {
-    transform: translateX(-10px) translateY(-8px) rotate(8deg);
+    transform: translateX(-6px) translateY(-5px) rotate(5deg);
   }
 }
 
 @keyframes bamboo-rock {
   0%,
   100% {
-    transform: translateX(-18px) rotate(-26deg);
+    transform: translateX(-14px) rotate(-20deg);
   }
   50% {
-    transform: translateX(-15px) rotate(-17deg);
+    transform: translateX(-12px) rotate(-16deg);
   }
 }
 
@@ -1997,13 +2008,13 @@ body.quick-contact-open .quick-contact-panel {
     font-size: 11px;
     right: 8px;
     top: 8px;
+    opacity: 1;
   }
 
   .panda-character {
     left: 10px;
     bottom: 6px;
-    transform: scale(0.88);
-    transform-origin: left bottom;
+    --mascot-scale: 0.88;
   }
 
   .crumbs {

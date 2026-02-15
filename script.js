@@ -283,10 +283,10 @@
           segment.classList.add("eaten");
           spawnCrumbBurst(5);
           playCrunch();
-        }, 220 * index);
+        }, 260 * index);
       });
 
-      const finishTime = 220 * segments.length + 440;
+      const finishTime = 260 * segments.length + 520;
       setTimeout(() => {
         pandaContainer.classList.remove("eating");
         bamboo.classList.remove("bamboo-tilt");
