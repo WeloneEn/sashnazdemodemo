@@ -324,7 +324,10 @@
         if (mouth) mouth.classList.remove("bite");
         pandaContainer.classList.add("satisfied");
         setHint("Панда довольна. Бамбук обновился, можно повторить.");
-        setTimeout(() => pandaContainer.classList.remove("satisfied"), 620);
+        setTimeout(() => {
+          pandaContainer.classList.remove("satisfied");
+          setHint("Привет, я Бабиджон");
+        }, 620);
         eatingLock = false;
       }, finishTime);
     };
