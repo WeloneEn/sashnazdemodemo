@@ -982,6 +982,7 @@ body.quick-contact-open .quick-contact-panel {
   background: linear-gradient(165deg, #fff, #ececec);
   border: 2px solid rgba(32, 36, 42, 0.78);
   animation: mascot-breathe 2.8s ease-in-out infinite;
+  z-index: 3;
 }
 
 .panda-eye-patch {
@@ -1057,6 +1058,7 @@ body.quick-contact-open .quick-contact-panel {
   border-radius: 0 0 14px 14px;
   transform: translateX(-50%);
   border-bottom: 2px solid #14171b;
+  z-index: 4;
 }
 
 .panda-body {
@@ -1067,6 +1069,7 @@ body.quick-contact-open .quick-contact-panel {
   height: 102px;
   border-radius: 52% 52% 46% 46%;
   background: #1f2328;
+  z-index: 2;
 }
 
 .panda-belly {
@@ -1105,12 +1108,13 @@ body.quick-contact-open .quick-contact-panel {
 
 .bamboo-svg {
   position: absolute;
-  right: clamp(24px, 8vw, 72px);
+  left: clamp(142px, 30vw, 222px);
   bottom: 18px;
   width: 42px;
   height: 170px;
   transform-origin: bottom center;
-  transition: transform 320ms ease;
+  transition: transform 220ms ease;
+  z-index: 3;
 }
 
 .bamboo-seg {
@@ -1135,6 +1139,7 @@ body.quick-contact-open .quick-contact-panel {
   height: 14px;
   border-radius: 100% 0 100% 0;
   background: linear-gradient(140deg, #6fc777, #3ea663);
+  transition: transform 220ms ease, opacity 220ms ease;
 }
 
 .bamboo-leaf.leaf-a {
@@ -1156,21 +1161,27 @@ body.quick-contact-open .quick-contact-panel {
 }
 
 .bamboo-svg.bamboo-tilt {
-  transform: translateX(-14px) rotate(-20deg);
+  transform: translateX(-42px) translateY(-16px) rotate(-34deg);
 }
 
 .bamboo-seg.eaten {
-  transform: translateY(-4px) scaleY(0.04);
+  transform: translateY(-9px) translateX(-3px) rotate(-12deg) scale(0.2);
+  opacity: 0;
+}
+
+.bamboo-leaf.eaten {
+  transform: translate(-7px, -11px) rotate(-28deg) scale(0.3);
   opacity: 0;
 }
 
 .crumbs {
   position: absolute;
-  left: clamp(118px, 28vw, 182px);
+  left: clamp(150px, 34vw, 238px);
   top: 110px;
   width: 110px;
   height: 62px;
   pointer-events: none;
+  z-index: 4;
 }
 
 .crumb {
@@ -1191,8 +1202,16 @@ body.quick-contact-open .quick-contact-panel {
   animation: mascot-eat-bob 560ms ease-in-out infinite;
 }
 
+.panda-container.pre-bite .panda-character {
+  animation: mascot-pre-bite 280ms cubic-bezier(.25, .46, .45, .94) 1 both;
+}
+
 .panda-container.eating .panda-mouth {
   animation: mascot-chew 320ms ease-in-out infinite alternate;
+}
+
+.panda-mouth.bite {
+  transform: translateX(-50%) scale(1.04, 1.28);
 }
 
 .panda-container.eating .panda-arm.left {
@@ -1205,6 +1224,10 @@ body.quick-contact-open .quick-contact-panel {
 
 .panda-container.eating .bamboo-svg {
   animation: bamboo-rock 560ms ease-in-out infinite;
+}
+
+.panda-container.satisfied .panda-eye::after {
+  animation: mascot-happy-blink 520ms ease-in-out 1;
 }
 
 /* Sonia easter runner */
@@ -1590,6 +1613,21 @@ body.quick-contact-open .quick-contact-panel {
   }
 }
 
+@keyframes mascot-happy-blink {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  20%,
+  60% {
+    transform: scaleY(0.12);
+  }
+  40%,
+  80% {
+    transform: scaleY(1);
+  }
+}
+
 @keyframes mascot-eat-bob {
   0%,
   100% {
@@ -1600,12 +1638,21 @@ body.quick-contact-open .quick-contact-panel {
   }
 }
 
-@keyframes mascot-chew {
+@keyframes mascot-pre-bite {
   0% {
-    transform: translateX(-50%) scaleY(0.78);
+    transform: translateY(0) rotate(0deg) scale(var(--mascot-scale, 1));
   }
   100% {
-    transform: translateX(-50%) scaleY(1);
+    transform: translateY(-1px) rotate(-1deg) scale(var(--mascot-scale, 1));
+  }
+}
+
+@keyframes mascot-chew {
+  0% {
+    transform: translateX(-50%) scale(1, 0.74);
+  }
+  100% {
+    transform: translateX(-50%) scale(1.08, 1.04);
   }
 }
 
@@ -1625,17 +1672,17 @@ body.quick-contact-open .quick-contact-panel {
     transform: translateX(0) translateY(0) rotate(0deg);
   }
   50% {
-    transform: translateX(-6px) translateY(-5px) rotate(5deg);
+    transform: translateX(10px) translateY(-10px) rotate(-24deg);
   }
 }
 
 @keyframes bamboo-rock {
   0%,
   100% {
-    transform: translateX(-14px) rotate(-20deg);
+    transform: translateX(-42px) translateY(-16px) rotate(-34deg);
   }
   50% {
-    transform: translateX(-12px) rotate(-16deg);
+    transform: translateX(-38px) translateY(-14px) rotate(-28deg);
   }
 }
 
@@ -1998,7 +2045,8 @@ body.quick-contact-open .quick-contact-panel {
   }
 
   .bamboo-svg {
-    right: 20px;
+    left: 132px;
+    right: auto;
     height: 146px;
   }
 
@@ -2018,7 +2066,7 @@ body.quick-contact-open .quick-contact-panel {
   }
 
   .crumbs {
-    left: 118px;
+    left: 128px;
     top: 102px;
   }
 }

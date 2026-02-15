@@ -238,9 +238,12 @@
   const pandaContainer = document.querySelector(".panda-container");
   const crunchSound = document.getElementById("crunch-sound");
   if (pandaContainer && crunchSound) {
+    const stage = pandaContainer.querySelector(".mascot-stage");
     const bamboo = pandaContainer.querySelector(".bamboo-svg");
     const segments = Array.from(pandaContainer.querySelectorAll(".bamboo-seg")).reverse();
+    const leaves = Array.from(pandaContainer.querySelectorAll(".bamboo-leaf"));
     const crumbsContainer = pandaContainer.querySelector(".crumbs");
+    const mouth = pandaContainer.querySelector(".panda-mouth");
     const hint = pandaContainer.querySelector(".panda-hint");
     let eatingLock = false;
 
@@ -248,15 +251,25 @@
       if (hint) hint.textContent = text;
     };
 
+    const syncCrumbsToMouth = () => {
+      if (!crumbsContainer || !mouth || !stage) return;
+      const stageRect = stage.getBoundingClientRect();
+      const mouthRect = mouth.getBoundingClientRect();
+      const left = mouthRect.left - stageRect.left + mouthRect.width * 0.52;
+      const top = mouthRect.top - stageRect.top + mouthRect.height * 0.5;
+      crumbsContainer.style.left = `${left}px`;
+      crumbsContainer.style.top = `${top}px`;
+    };
+
     const spawnCrumbBurst = (amount = 6) => {
       if (!crumbsContainer) return;
       for (let i = 0; i < amount; i++) {
         const crumb = document.createElement("div");
         crumb.className = "crumb";
-        crumb.style.left = `${30 + Math.random() * 60}px`;
-        crumb.style.top = `${14 + Math.random() * 24}px`;
-        crumb.style.setProperty("--tx", `${8 + Math.random() * 36}px`);
-        crumb.style.setProperty("--ty", `${-12 - Math.random() * 18}px`);
+        crumb.style.left = `${-4 + Math.random() * 10}px`;
+        crumb.style.top = `${-3 + Math.random() * 8}px`;
+        crumb.style.setProperty("--tx", `${10 + Math.random() * 30}px`);
+        crumb.style.setProperty("--ty", `${-14 - Math.random() * 16}px`);
         crumb.style.setProperty("--dur", `${620 + Math.random() * 420}ms`);
         crumbsContainer.appendChild(crumb);
         requestAnimationFrame(() => crumb.classList.add("show"));
@@ -274,35 +287,57 @@
     const runEatSequence = () => {
       if (!bamboo || !segments.length || eatingLock) return;
       eatingLock = true;
-      setHint("Маскот с удовольствием жуёт бамбук...");
-      pandaContainer.classList.add("eating");
-      bamboo.classList.add("bamboo-tilt");
+      const preBiteDelay = 240;
+      setHint("Панда берёт бамбук лапкой...");
+      pandaContainer.classList.add("pre-bite");
+      pandaContainer.classList.remove("satisfied");
+      syncCrumbsToMouth();
+
+      setTimeout(() => {
+        pandaContainer.classList.remove("pre-bite");
+        pandaContainer.classList.add("eating");
+        bamboo.classList.add("bamboo-tilt");
+        setHint("Маскот с удовольствием жуёт бамбук...");
+      }, preBiteDelay);
 
       segments.forEach((segment, index) => {
         setTimeout(() => {
+          if (mouth) {
+            mouth.classList.add("bite");
+            setTimeout(() => mouth.classList.remove("bite"), 180);
+          }
           segment.classList.add("eaten");
-          spawnCrumbBurst(5);
+          const leaf = leaves[index];
+          if (leaf) leaf.classList.add("eaten");
+          spawnCrumbBurst(6);
           playCrunch();
-        }, 260 * index);
+        }, preBiteDelay + 260 * index);
       });
 
-      const finishTime = 260 * segments.length + 520;
+      const finishTime = preBiteDelay + 260 * segments.length + 520;
       setTimeout(() => {
+        pandaContainer.classList.remove("pre-bite");
         pandaContainer.classList.remove("eating");
         bamboo.classList.remove("bamboo-tilt");
         segments.forEach((segment) => segment.classList.remove("eaten"));
-        setHint("Бамбук обновился. Можно повторить ещё раз.");
+        leaves.forEach((leaf) => leaf.classList.remove("eaten"));
+        if (mouth) mouth.classList.remove("bite");
+        pandaContainer.classList.add("satisfied");
+        setHint("Панда довольна. Бамбук обновился, можно повторить.");
+        setTimeout(() => pandaContainer.classList.remove("satisfied"), 620);
         eatingLock = false;
       }, finishTime);
     };
 
     pandaContainer.addEventListener("click", runEatSequence);
+    window.addEventListener("resize", syncCrumbsToMouth);
     pandaContainer.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
         runEatSequence();
       }
     });
+    syncCrumbsToMouth();
   }
 
   // Hero tilt effect
