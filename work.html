@@ -1,0 +1,104 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Портфолио — Студия Александры Николаевой</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="body-bg"></div>
+  <audio id="crunch-sound" preload="auto">
+    <source src="./панда няма.mp3" type="audio/mpeg">
+    <source src="./%D0%BF%D0%B0%D0%BD%D0%B4%D0%B0%20%D0%BD%D1%8F%D0%BC%D0%B0.mp3" type="audio/mpeg">
+  </audio>
+
+  <header class="nav">
+    <div class="logo">Александра Николаева</div>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="work.html" class="active">Портфолио</a>
+      <a href="about.html">О студии</a>
+      <a href="testimonials.html">Отзывы</a>
+      <a href="contact.html">Связаться</a>
+    </nav>
+  </header>
+
+  <main class="work" style="padding-top:120px;">
+    <div class="panda-container" role="button" tabindex="0" aria-label="Фирменный маскот студии. Нажмите, чтобы покормить панду." title="Маскот студии">
+      <div class="panda-hint" aria-live="polite">Нажмите, чтобы покормить маскота бамбуком</div>
+      <div class="mascot-stage" aria-hidden="true">
+        <div class="mascot-aura"></div>
+        <div class="panda-character">
+          <span class="panda-ear left"></span>
+          <span class="panda-ear right"></span>
+          <div class="panda-head">
+            <span class="panda-eye-patch left"></span>
+            <span class="panda-eye-patch right"></span>
+            <span class="panda-eye left"></span>
+            <span class="panda-eye right"></span>
+            <span class="panda-spark left"></span>
+            <span class="panda-spark right"></span>
+            <span class="panda-nose"></span>
+            <span class="panda-mouth"></span>
+          </div>
+          <div class="panda-body">
+            <span class="panda-belly"></span>
+            <span class="panda-arm left"></span>
+            <span class="panda-arm right"></span>
+            <span class="panda-foot left"></span>
+            <span class="panda-foot right"></span>
+          </div>
+        </div>
+        <div class="bamboo-svg">
+          <span class="bamboo-seg"></span>
+          <span class="bamboo-seg"></span>
+          <span class="bamboo-seg"></span>
+          <span class="bamboo-seg"></span>
+          <span class="bamboo-leaf leaf-a"></span>
+          <span class="bamboo-leaf leaf-b"></span>
+          <span class="bamboo-leaf leaf-c"></span>
+        </div>
+        <div class="crumbs"></div>
+      </div>
+    </div>
+
+    <div class="favorites-panel">
+      <h2>Портфолио</h2>
+      <p>
+        Здесь представлены проекты по подбору плитки и дизайну санузлов.
+        Каждый интерьер создан с вниманием к деталям, комфорту и долговечности решений.
+      </p>
+      <div class="grid">
+        <article class="work-item">
+          <a href="project-1.html">
+            <figure class="thumb"></figure>
+            <h3>Ванная комната в природных оттенках</h3>
+            <p>Тёплая палитра и мягкий свет для расслабляющей атмосферы каждый день.</p>
+          </a>
+        </article>
+        <article class="work-item">
+          <a href="project-2.html">
+            <figure class="thumb"></figure>
+            <h3>Санузел в стиле минимализм</h3>
+            <p>Чистые линии, продуманная геометрия и функциональная организация пространства.</p>
+          </a>
+        </article>
+        <article class="work-item">
+          <a href="project-3.html">
+            <figure class="thumb"></figure>
+            <h3>Современный проект для семьи</h3>
+            <p>Эстетичный и практичный интерьер, рассчитанный на комфорт всей семьи.</p>
+          </a>
+        </article>
+      </div>
+    </div>
+
+    <p>Если вы планируете индивидуальный проект, выберите удобный способ связи на странице контактов.</p>
+  </main>
+
+  <footer class="footer">© Студия Александры Николаевой — премиальный дизайн плитки и санузлов</footer>
+  <script src="script.js"></script>
+</body>
+</html>
