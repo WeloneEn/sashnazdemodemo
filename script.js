@@ -97,12 +97,12 @@
 
     const list = document.createElement("div");
     list.className = "mobile-nav-list";
-    const iconSvgByHref = {
-      "index.html": '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M3 10.8L12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z"/></svg>',
-      "work.html": '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M2 7a2 2 0 0 1 2-2h4l2 2h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/></svg>',
-      "about.html": '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12m0 2c-4.1 0-7.5 2.2-7.5 5V21h15v-2c0-2.8-3.4-5-7.5-5"/></svg>',
-      "testimonials.html": '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2"/></svg>',
-      "contact.html": '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm2 0l7 5 7-5z"/></svg>'
+    const iconByHref = {
+      "index.html": "🏠",
+      "work.html": "🧱",
+      "about.html": "👩",
+      "testimonials.html": "💬",
+      "contact.html": "✉️"
     };
     unique.forEach((item) => {
       const link = document.createElement("a");
@@ -115,7 +115,7 @@
       const icon = document.createElement("span");
       icon.className = "mobile-nav-link-icon";
       icon.setAttribute("aria-hidden", "true");
-      icon.innerHTML = iconSvgByHref[item.href] || '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><circle cx="12" cy="12" r="3"/></svg>';
+      icon.textContent = iconByHref[item.href] || "•";
       const label = document.createElement("span");
       label.className = "mobile-nav-link-label";
       label.textContent = item.label || item.href;
@@ -169,60 +169,31 @@
 
   buildMobileNav();
 
-  const buildQuickContactDock = () => {
-    if (document.querySelector(".quick-contact-fab") || document.querySelector(".quick-contact-panel")) return;
-
-    const fab = document.createElement("button");
-    fab.type = "button";
-    fab.className = "quick-contact-fab";
-    fab.setAttribute("aria-expanded", "false");
-    fab.setAttribute("aria-controls", "quick-contact-panel");
-    fab.setAttribute("aria-label", "Открыть контакты");
-    fab.textContent = "Контакты";
-
-    const panel = document.createElement("aside");
-    panel.className = "quick-contact-panel";
-    panel.id = "quick-contact-panel";
-    panel.setAttribute("aria-label", "Быстрые контакты");
-    panel.innerHTML = `
-      <div class="quick-contact-panel-title">Связь со студией</div>
-      <a class="quick-contact-panel-link" href="https://t.me/Welika_00" target="_blank" rel="noopener noreferrer">Телеграм: @Welika_00</a>
-      <a class="quick-contact-panel-link" href="mailto:jadeloomwear@gmail.com">Почта: jadeloomwear@gmail.com</a>
-      <a class="quick-contact-panel-link" href="tel:+79940057901">Телефон: +7 994 005 79 01</a>
-      <a class="quick-contact-panel-link" href="contact.html">Все контакты</a>
-    `;
-
-    const backdrop = document.createElement("div");
-    backdrop.className = "quick-contact-backdrop";
-
-    const closeDock = () => {
-      document.body.classList.remove("quick-contact-open");
-      fab.setAttribute("aria-expanded", "false");
-    };
-    const openDock = () => {
-      document.body.classList.add("quick-contact-open");
-      fab.setAttribute("aria-expanded", "true");
-    };
-
-    fab.addEventListener("click", () => {
-      const opened = document.body.classList.contains("quick-contact-open");
-      if (opened) closeDock();
-      else openDock();
+  // Logo click: heart rain
+  const logo = document.querySelector(".logo");
+  if (logo) {
+    logo.addEventListener("click", () => {
+      const hearts = ["❤", "💖", "💗", "💕", "💘"];
+      for (let i = 0; i < 14; i++) {
+        setTimeout(() => {
+          const heart = document.createElement("div");
+          heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+          heart.style.position = "fixed";
+          heart.style.left = `${Math.random() * (window.innerWidth - 24)}px`;
+          heart.style.top = "-28px";
+          heart.style.fontSize = `${18 + Math.floor(Math.random() * 10)}px`;
+          heart.style.lineHeight = "1";
+          heart.style.userSelect = "none";
+          heart.style.pointerEvents = "none";
+          heart.style.zIndex = "1200";
+          heart.style.filter = "drop-shadow(0 3px 6px rgba(200, 44, 100, 0.35))";
+          heart.style.animation = `heart-fall ${1.8 + Math.random() * 1.3}s linear forwards`;
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 3200);
+        }, i * 90);
+      }
     });
-    backdrop.addEventListener("click", closeDock);
-    panel.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", closeDock);
-    });
-    window.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeDock();
-    });
-
-    document.body.appendChild(backdrop);
-    document.body.appendChild(panel);
-    document.body.appendChild(fab);
-  };
-
-  buildQuickContactDock();
+  }
 
   // Work cards wiggle on hover
   document.querySelectorAll(".work-item").forEach((item) => {
@@ -234,16 +205,13 @@
     });
   });
 
-  // Mascot interaction (work page)
+  // Panda easter egg (work page)
   const pandaContainer = document.querySelector(".panda-container");
   const crunchSound = document.getElementById("crunch-sound");
   if (pandaContainer && crunchSound) {
-    const stage = pandaContainer.querySelector(".mascot-stage");
     const bamboo = pandaContainer.querySelector(".bamboo-svg");
     const segments = Array.from(pandaContainer.querySelectorAll(".bamboo-seg")).reverse();
-    const leaves = Array.from(pandaContainer.querySelectorAll(".bamboo-leaf"));
     const crumbsContainer = pandaContainer.querySelector(".crumbs");
-    const mouth = pandaContainer.querySelector(".panda-mouth");
     const hint = pandaContainer.querySelector(".panda-hint");
     let eatingLock = false;
 
@@ -251,25 +219,15 @@
       if (hint) hint.textContent = text;
     };
 
-    const syncCrumbsToMouth = () => {
-      if (!crumbsContainer || !mouth || !stage) return;
-      const stageRect = stage.getBoundingClientRect();
-      const mouthRect = mouth.getBoundingClientRect();
-      const left = mouthRect.left - stageRect.left + mouthRect.width * 0.52;
-      const top = mouthRect.top - stageRect.top + mouthRect.height * 0.5;
-      crumbsContainer.style.left = `${left}px`;
-      crumbsContainer.style.top = `${top}px`;
-    };
-
     const spawnCrumbBurst = (amount = 6) => {
       if (!crumbsContainer) return;
       for (let i = 0; i < amount; i++) {
         const crumb = document.createElement("div");
         crumb.className = "crumb";
-        crumb.style.left = `${-4 + Math.random() * 10}px`;
-        crumb.style.top = `${-3 + Math.random() * 8}px`;
-        crumb.style.setProperty("--tx", `${10 + Math.random() * 30}px`);
-        crumb.style.setProperty("--ty", `${-14 - Math.random() * 16}px`);
+        crumb.style.left = `${30 + Math.random() * 60}px`;
+        crumb.style.top = `${14 + Math.random() * 24}px`;
+        crumb.style.setProperty("--tx", `${8 + Math.random() * 36}px`);
+        crumb.style.setProperty("--ty", `${-12 - Math.random() * 18}px`);
         crumb.style.setProperty("--dur", `${620 + Math.random() * 420}ms`);
         crumbsContainer.appendChild(crumb);
         requestAnimationFrame(() => crumb.classList.add("show"));
@@ -287,61 +245,48 @@
     const runEatSequence = () => {
       if (!bamboo || !segments.length || eatingLock) return;
       eatingLock = true;
-      const preBiteDelay = 240;
-      setHint("Панда берёт бамбук лапкой...");
-      pandaContainer.classList.add("pre-bite");
-      pandaContainer.classList.remove("satisfied");
-      syncCrumbsToMouth();
-
-      setTimeout(() => {
-        pandaContainer.classList.remove("pre-bite");
-        pandaContainer.classList.add("eating");
-        bamboo.classList.add("bamboo-tilt");
-        setHint("Маскот с удовольствием жуёт бамбук...");
-      }, preBiteDelay);
+      setHint("Панда жует бамбук...");
+      pandaContainer.classList.add("eating");
+      bamboo.classList.add("bamboo-tilt");
 
       segments.forEach((segment, index) => {
         setTimeout(() => {
-          if (mouth) {
-            mouth.classList.add("bite");
-            setTimeout(() => mouth.classList.remove("bite"), 180);
-          }
           segment.classList.add("eaten");
-          const leaf = leaves[index];
-          if (leaf) leaf.classList.add("eaten");
-          spawnCrumbBurst(6);
+          spawnCrumbBurst(5);
           playCrunch();
-        }, preBiteDelay + 260 * index);
+        }, 220 * index);
       });
 
-      const finishTime = preBiteDelay + 260 * segments.length + 520;
+      const finishTime = 220 * segments.length + 440;
       setTimeout(() => {
-        pandaContainer.classList.remove("pre-bite");
         pandaContainer.classList.remove("eating");
         bamboo.classList.remove("bamboo-tilt");
         segments.forEach((segment) => segment.classList.remove("eaten"));
-        leaves.forEach((leaf) => leaf.classList.remove("eaten"));
-        if (mouth) mouth.classList.remove("bite");
-        pandaContainer.classList.add("satisfied");
-        setHint("Панда довольна. Бамбук обновился, можно повторить.");
-        setTimeout(() => {
-          pandaContainer.classList.remove("satisfied");
-          setHint("Привет, я Бабиджон");
-        }, 620);
+        setHint("Бамбук вырос снова. Можно кормить ещё!");
         eatingLock = false;
       }, finishTime);
     };
 
+    pandaContainer.addEventListener("mouseenter", runEatSequence);
     pandaContainer.addEventListener("click", runEatSequence);
-    window.addEventListener("resize", syncCrumbsToMouth);
     pandaContainer.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
         runEatSequence();
       }
     });
-    syncCrumbsToMouth();
   }
+
+  // Secret keyboard message
+  let keys = [];
+  document.addEventListener("keydown", (event) => {
+    keys.push(event.key.toLowerCase());
+    if (keys.length > 5) keys.shift();
+    if (keys.join("") === "tile") {
+      alert("🎨 Добро пожаловать в мир плитки! Бабиджон любит дизайн. 🎨");
+      keys = [];
+    }
+  });
 
   // Hero tilt effect
   const tilt = document.getElementById("tilt");
@@ -367,7 +312,7 @@
   window.addEventListener("load", () => {
     document.body.style.opacity = "1";
     const items = document.querySelectorAll(
-      ".nav, .title, .lead, .btn, .work-item, .testimonial, .work h2, .about h2, .contact h2, .testimonials-page h2, .footer, .hero-visual, .color-palette"
+      ".nav, .title, .lead, .btn, .work-item, .testimonial, .work h2, .about h2, .contact h2, .testimonials h2, .footer, .hero-visual, .color-palette"
     );
     items.forEach((item, index) => {
       item.style.opacity = "0";
@@ -615,7 +560,7 @@
       prev = next;
     }
 
-    // jump down after "О студии"
+    // jump down after "О Сашуле"
     const jumpX = prev.x + 26 * flip;
     const jumpY = prev.y + 88;
     runner.classList.add("is-jumping");
@@ -684,13 +629,7 @@
   // Page transitions for internal links
   document.querySelectorAll("a[href]").forEach((anchor) => {
     const href = anchor.getAttribute("href");
-    if (
-      !href ||
-      href.startsWith("http") ||
-      href.startsWith("mailto:") ||
-      href.startsWith("tel:") ||
-      href.startsWith("#")
-    ) {
+    if (!href || href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("#")) {
       return;
     }
     anchor.addEventListener("click", (event) => {
@@ -713,15 +652,52 @@
     });
   });
 
-  // Contact page behavior
-  const showPhoneBtn = document.getElementById("show-phone");
-  const phoneLink = document.getElementById("phone-link");
-  if (showPhoneBtn && phoneLink) {
-    showPhoneBtn.addEventListener("click", () => {
-      phoneLink.hidden = false;
-      showPhoneBtn.hidden = true;
-    });
-  }
+  // Contact form behavior
+  const form = document.getElementById("contact-form");
+  if (form) {
+    const status = document.getElementById("form-status");
+    const fallback = document.getElementById("mailto-fallback");
 
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const name = String(data.get("name") || "").trim();
+      const email = String(data.get("email") || "").trim();
+      const message = String(data.get("message") || "").trim();
+
+      if (!name || !email || !message) {
+        if (status) status.textContent = "Пожалуйста, заполните все поля.";
+        return;
+      }
+
+      if (status) status.textContent = "Отправка заявки...";
+      const btn = form.querySelector('button[type="submit"]');
+      if (btn) btn.style.animation = "pulse 0.5s infinite";
+
+      const subject = encodeURIComponent(`Заявка с сайта от ${name}`);
+      const body = encodeURIComponent(`Имя: ${name}\nEmail: ${email}\n\n${message}`);
+      window.location.href = `mailto:jadeloomwear@gmail.com?subject=${subject}&body=${body}`;
+
+      setTimeout(() => {
+        if (status) {
+          status.textContent =
+            "Если письмо не открылось автоматически, используйте кнопку \"Запасной mailto\".";
+        }
+        if (btn) btn.style.animation = "";
+      }, 600);
+    });
+
+    if (fallback) {
+      fallback.addEventListener("click", () => {
+        const elements = form.elements;
+        const name = String(elements.namedItem("name")?.value || "").trim();
+        const email = String(elements.namedItem("email")?.value || "").trim();
+        const message = String(elements.namedItem("message")?.value || "").trim();
+        const subject = encodeURIComponent(`Заявка с сайта от ${name}`);
+        const body = encodeURIComponent(`Имя: ${name}\nEmail: ${email}\n\n${message}`);
+        window.location.href = `mailto:jadeloomwear@gmail.com?subject=${subject}&body=${body}`;
+      });
+    }
+  }
 })();
 

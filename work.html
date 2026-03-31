@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Портфолио — Студия Александры Николаевой</title>
+  <title>Портфолио — Бабиджон</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -15,89 +15,116 @@
   </audio>
 
   <header class="nav">
-    <div class="logo">Александра Николаева</div>
+    <div class="logo">Бабиджон</div>
     <nav>
       <a href="index.html">Главная</a>
       <a href="work.html" class="active">Портфолио</a>
-      <a href="about.html">О студии</a>
+      <a href="about.html">О Сашуле</a>
       <a href="testimonials.html">Отзывы</a>
       <a href="contact.html">Связаться</a>
     </nav>
   </header>
 
   <main class="work" style="padding-top:120px;">
-    <div class="panda-container" role="button" tabindex="0" aria-label="Фирменный маскот студии. Нажмите, чтобы покормить панду." title="Маскот студии">
-      <div class="panda-hint" aria-live="polite">Привет, я Бабиджон</div>
-      <div class="mascot-stage" aria-hidden="true">
-        <div class="panda-character">
-          <span class="panda-ear left"></span>
-          <span class="panda-ear right"></span>
-          <div class="panda-head">
-            <span class="panda-eye-patch left"></span>
-            <span class="panda-eye-patch right"></span>
-            <span class="panda-eye left"></span>
-            <span class="panda-eye right"></span>
-            <span class="panda-spark left"></span>
-            <span class="panda-spark right"></span>
-            <span class="panda-nose"></span>
-            <span class="panda-mouth"></span>
-          </div>
-          <div class="panda-body">
-            <span class="panda-belly"></span>
-            <span class="panda-arm left"></span>
-            <span class="panda-arm right"></span>
-            <span class="panda-foot left"></span>
-            <span class="panda-foot right"></span>
-          </div>
-        </div>
-        <div class="bamboo-svg">
-          <span class="bamboo-seg"></span>
-          <span class="bamboo-seg"></span>
-          <span class="bamboo-seg"></span>
-          <span class="bamboo-seg"></span>
-          <span class="bamboo-leaf leaf-a"></span>
-          <span class="bamboo-leaf leaf-b"></span>
-          <span class="bamboo-leaf leaf-c"></span>
-        </div>
-        <div class="crumbs"></div>
-      </div>
+    <div class="panda-container" role="button" tabindex="0" aria-label="Панда ест бамбук. Наведите или кликните, чтобы покормить её." title="Панда любит бамбук">
+      <div class="panda-hint" aria-live="polite">Нажми или наведи, чтобы покормить панду</div>
+
+      <svg class="panda-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="panda-face-light" cx="50%" cy="28%" r="78%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="78%" stop-color="#f5f5f5"/>
+            <stop offset="100%" stop-color="#e9e9e9"/>
+          </radialGradient>
+        </defs>
+        <circle cx="32" cy="26" r="14" fill="#111"/>
+        <circle cx="88" cy="26" r="14" fill="#111"/>
+        <circle cx="34" cy="28" r="6.5" fill="#f8f8f8"/>
+        <circle cx="86" cy="28" r="6.5" fill="#f8f8f8"/>
+        <circle cx="60" cy="62" r="41" fill="url(#panda-face-light)" stroke="#141414" stroke-width="2.8"/>
+        <circle cx="46.5" cy="53" r="10.5" fill="#121212"/>
+        <circle cx="73.5" cy="53" r="10.5" fill="#121212"/>
+        <circle cx="47" cy="53.2" r="4.2" fill="#0f0f0f"/>
+        <circle cx="73" cy="53.2" r="4.2" fill="#0f0f0f"/>
+        <circle cx="45.8" cy="51.8" r="1.3" fill="#fff"/>
+        <circle cx="71.8" cy="51.8" r="1.3" fill="#fff"/>
+        <ellipse cx="60" cy="67.5" rx="11.5" ry="8.8" fill="#fefefe"/>
+        <path d="M60 62.5 C57.2 59.1, 52.8 62.1, 55.2 65.5 C56.8 67.7, 60 69.2, 60 69.2 C60 69.2, 63.2 67.7, 64.8 65.5 C67.2 62.1, 62.8 59.1, 60 62.5 Z" fill="#111"/>
+        <path d="M53.5 73.5 Q60 78.5 66.5 73.5" fill="none" stroke="#1a1a1a" stroke-width="2.1" stroke-linecap="round"/>
+        <g id="mouth">
+          <ellipse id="mouth-closed" cx="60" cy="75.7" rx="9.8" ry="2.7" fill="#141414"/>
+          <g id="mouth-open" opacity="0">
+            <ellipse cx="60" cy="78.3" rx="10.8" ry="6.8" fill="#8f2730"/>
+            <ellipse cx="60" cy="82.1" rx="4.6" ry="2.4" fill="#f07a8f"/>
+            <rect x="53.8" y="74.9" width="2.8" height="3.8" rx="0.6" fill="#fff"/>
+            <rect x="63.4" y="74.9" width="2.8" height="3.8" rx="0.6" fill="#fff"/>
+          </g>
+        </g>
+        <g id="left-paw">
+          <circle cx="42" cy="88" r="8.6" fill="#121212"/>
+          <circle cx="38.2" cy="84.3" r="1.8" fill="#f2f2f2"/>
+          <circle cx="42" cy="83.1" r="1.8" fill="#f2f2f2"/>
+          <circle cx="45.8" cy="84.3" r="1.8" fill="#f2f2f2"/>
+        </g>
+        <g id="right-paw">
+          <circle cx="78" cy="88" r="8.6" fill="#121212"/>
+          <circle cx="74.2" cy="84.3" r="1.8" fill="#f2f2f2"/>
+          <circle cx="78" cy="83.1" r="1.8" fill="#f2f2f2"/>
+          <circle cx="81.8" cy="84.3" r="1.8" fill="#f2f2f2"/>
+        </g>
+        <circle id="tail" cx="60" cy="102.5" r="4.8" fill="#111"/>
+      </svg>
+
+      <svg class="bamboo-svg" viewBox="0 0 20 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect class="bamboo-seg" x="8" y="60" width="4" height="40" />
+        <rect class="bamboo-seg" x="8" y="40" width="4" height="20" />
+        <rect class="bamboo-seg" x="8" y="20" width="4" height="20" />
+        <rect class="bamboo-seg" x="8" y="0" width="4" height="20" />
+        <path class="bamboo-leaf" d="M12 14 C20 8, 18 20, 12 22 Z" />
+        <path class="bamboo-leaf" d="M8 30 C0 22, 2 36, 8 38 Z" />
+        <path class="bamboo-leaf" d="M12 50 C20 44, 18 56, 12 58 Z" />
+        <line x1="6" y1="20" x2="14" y2="20" stroke="#1f7a3f" stroke-width="1"/>
+        <line x1="6" y1="40" x2="14" y2="40" stroke="#1f7a3f" stroke-width="1"/>
+        <line x1="6" y1="60" x2="14" y2="60" stroke="#1f7a3f" stroke-width="1"/>
+      </svg>
+      <div class="crumbs" aria-hidden="true"></div>
     </div>
 
     <div class="favorites-panel">
       <h2>Портфолио</h2>
       <p>
-        Здесь представлены проекты по подбору плитки и дизайну санузлов.
-        Каждый интерьер создан с вниманием к деталям, комфорту и долговечности решений.
+        Ниже показаны любимые проекты по подбору плитки и дизайну ванной.
+        Каждый проект выполнен с вниманием к деталям и визуальному анусу.
       </p>
       <div class="grid">
         <article class="work-item">
           <a href="project-1.html">
             <figure class="thumb"></figure>
-            <h3>Ванная комната в природных оттенках</h3>
-            <p>Тёплая палитра и мягкий свет для расслабляющей атмосферы каждый день.</p>
+            <h3>Ванная комната в природных оттенках кака</h3>
+            <p>Теплые тона и мягкий свет для расслабляющей атмосферы дрочки.</p>
           </a>
         </article>
         <article class="work-item">
           <a href="project-2.html">
             <figure class="thumb"></figure>
-            <h3>Санузел в стиле минимализм</h3>
-            <p>Чистые линии, продуманная геометрия и функциональная организация пространства.</p>
+            <h3>Санузел в стиле минимализм нет нихуя</h3>
+            <p>Чистые линии и анальность в каждом алименте.</p>
           </a>
         </article>
         <article class="work-item">
           <a href="project-3.html">
             <figure class="thumb"></figure>
-            <h3>Современный проект для семьи</h3>
-            <p>Эстетичный и практичный интерьер, рассчитанный на комфорт всей семьи.</p>
+            <h3>Современный проект для семьи из собак</h3>
+            <p>Практичная композиция для ежедневного использования.</p>
           </a>
         </article>
       </div>
     </div>
 
-    <p>Если вы планируете индивидуальный проект, выберите удобный способ связи на странице контактов.</p>
+    <p>Если вам нужен индивидуальный проект, не звоните.</p>
   </main>
 
-  <footer class="footer">© Студия Александры Николаевой — премиальный дизайн плитки и санузлов</footer>
+  <footer class="footer">© Бабиджон — Специалист по вымогательству денег</footer>
   <script src="script.js"></script>
 </body>
 </html>
